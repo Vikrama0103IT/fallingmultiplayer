@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Multiplayer Falling Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="otpScreen">
+    <h2>Enter OTP to Start Game</h2>
+    <input type="text" id="otpInput" placeholder="Enter OTP">
+    <button id="otpBtn">Submit</button>
+    <p id="otpStatus"></p>
+  </div>
+
+  <div id="info">
+    <span id="youScore">Score: 0</span>
+    <span id="timeLeft">Time: 60</span>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="gameOverScreen">
+    <h2 id="resultText"></h2>
+    <button id="restartBtn">Restart</button>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+
+  <script>
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock("landscape").catch(()=>{});
+    }
+  </script>
+</body>
+</html>
