@@ -11,7 +11,7 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 const resultText = document.getElementById("resultText");
 const restartBtn = document.getElementById("restartBtn");
 
-// ✅ Updated socket connection for ALL devices (PC / Android / iOS / WiFi / 4G)
+// Socket
 const socket = io("/", {
   transports: ["websocket"],
   reconnection: true,
@@ -118,7 +118,7 @@ socket.on("restartGame", () => {
   gameTime = 60;
 });
 
-// Controls
+// Keyboard Controls
 const keys = {};
 window.addEventListener("keydown", e => keys[e.key] = true);
 window.addEventListener("keyup", e => keys[e.key] = false);
@@ -130,11 +130,32 @@ function handleInput() {
   }
 }
 
+// 🔥 Mobile Touch Controls (added)
+canvas.addEventListener("touchstart", (e) => {
+  const touchX = e.touches[0].clientX;
+  const middle = canvas.width / 2;
+
+  if (playerIndex !== null && !gameOver) {
+    if (touchX < middle) socket.emit("move", "left");
+    else socket.emit("move", "right");
+  }
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  const touchX = e.touches[0].clientX;
+  const middle = canvas.width / 2;
+
+  if (playerIndex !== null && !gameOver) {
+    if (touchX < middle) socket.emit("move", "left");
+    else socket.emit("move", "right");
+  }
+});
+
 // Drawing
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw blocks (RED)
+  // Blocks
   blocks.forEach(b => {
     ctx.fillStyle = "#ff595e";
     ctx.fillRect((b.x / 400) * canvas.width, b.y, 30, 30);
@@ -143,7 +164,7 @@ function draw() {
     ctx.strokeRect((b.x / 400) * canvas.width, b.y, 30, 30);
   });
 
-  // Draw paddle (BLUE)
+  // Paddle
   const me = players[socket.id];
   if (me) {
     const px = (me.x / 400) * canvas.width;
@@ -159,4 +180,3 @@ function loop() {
   requestAnimationFrame(loop);
 }
 loop();
-
