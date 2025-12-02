@@ -11,7 +11,14 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 const resultText = document.getElementById("resultText");
 const restartBtn = document.getElementById("restartBtn");
 
-const socket = io();
+// ✅ Updated socket connection for ALL devices (PC / Android / iOS / WiFi / 4G)
+const socket = io("/", {
+  transports: ["websocket"],
+  reconnection: true,
+  reconnectionAttempts: 10,
+  reconnectionDelay: 500
+});
+
 let players = {};
 let blocks = [];
 let playerIndex = null;
@@ -127,23 +134,21 @@ function handleInput() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 🔥 Draw blocks (RED)
+  // Draw blocks (RED)
   blocks.forEach(b => {
-    ctx.fillStyle = "#ff595e"; // red
+    ctx.fillStyle = "#ff595e";
     ctx.fillRect((b.x / 400) * canvas.width, b.y, 30, 30);
-
-    // block outline for visibility
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2;
     ctx.strokeRect((b.x / 400) * canvas.width, b.y, 30, 30);
   });
 
-  // 🔥 Draw paddle (BLUE)
+  // Draw paddle (BLUE)
   const me = players[socket.id];
   if (me) {
     const px = (me.x / 400) * canvas.width;
     const py = canvas.height - 90;
-    ctx.fillStyle = "#1982c4"; // blue
+    ctx.fillStyle = "#1982c4";
     ctx.fillRect(px, py, 60, 20);
   }
 }
