@@ -1,62 +1,71 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  background: #111;
-  color: white;
-  font-family: Arial, sans-serif;
+/* OTP UI Modern Styling */
+.otp-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 32px;
+  border-radius: 18px;
+  width: 85%;
+  max-width: 420px;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.5s ease;
 }
 
-/* OTP */
-#otpScreen {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  z-index: 20;
+.otp-title {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.otp-subtitle {
+  color: #dcdcdc;
+  font-size: 15px;
+  margin-bottom: 20px;
 }
 
 #otpInput {
-  padding: 8px;
+  width: 80%;
+  padding: 14px;
   font-size: 20px;
-  width: 200px;
-}
-
-/* Score */
-#info {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  z-index: 15;
-  display: none;
-}
-
-/* Canvas fullscreen */
-canvas {
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  background: #222;
-}
-
-/* Game Over */
-#gameOverScreen {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
   text-align: center;
-  z-index: 25;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 18px;
+  outline: none;
+  background: #ffffff;
 }
 
-#restartBtn {
-  padding: 12px 30px;
-  font-size: 20px;
-  background: #00c853;
-  color: white;
-  border-radius: 8px;
+.otp-btn {
+  width: 85%;
+  padding: 15px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
   border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+.otp-btn:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+}
+
+.otp-status {
+  font-size: 17px;
+  color: #ffdf5d;
+  margin-top: 14px;
+  min-height: 20px;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -46%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
 }
