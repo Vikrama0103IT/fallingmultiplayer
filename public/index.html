@@ -9,13 +9,18 @@
 
 <body>
 
-  <div id="otpScreen">
-    <h2>Enter Code to Start Game</h2>
-    <input type="text" id="otpInput" placeholder="Enter OTP">
-    <button id="otpBtn">Submit</button>
-    <p id="otpStatus"></p>
+  <!-- 🔥 Improved OTP Screen -->
+  <div id="otpScreen" class="otp-container">
+    <h2 class="otp-title">Enter Match Code</h2>
+    <p class="otp-subtitle">Both players must enter the same OTP to start the match</p>
+
+    <input type="text" id="otpInput" maxlength="6" placeholder="Enter 6-digit code">
+    <button id="otpBtn" class="otp-btn">Start Match</button>
+
+    <p id="otpStatus" class="otp-status"></p>
   </div>
 
+  <!-- Game UI Info -->
   <div id="info">
     <span id="youScore">Score: 0</span>
     <span id="timeLeft">Time: 60</span>
@@ -23,19 +28,22 @@
 
   <canvas id="gameCanvas"></canvas>
 
+  <!-- Game Over Screen -->
   <div id="gameOverScreen">
     <h2 id="resultText"></h2>
     <button id="restartBtn">Restart</button>
   </div>
 
+  <!-- Scripts -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="game.js"></script>
 
+  <!-- Lock Landscape Mode on Mobile -->
   <script>
     if (screen.orientation && screen.orientation.lock) {
       screen.orientation.lock("landscape").catch(()=>{});
     }
   </script>
+
 </body>
 </html>
-
